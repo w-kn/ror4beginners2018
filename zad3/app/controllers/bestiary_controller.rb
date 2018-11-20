@@ -2,11 +2,11 @@
 
 class BestiaryController < ApplicationController
   def index
-
+     @monsters = monsters
   end
 
   def novigrad_monsters
-
+     @monsters = monsters.select{ |monster| monster[:location] == "Novigrad"}
   end
 
   private
@@ -14,7 +14,7 @@ class BestiaryController < ApplicationController
   def monsters
     @monsters ||= begin
       Faker::Config.random = Random.new(42)
-      (0..20).map do |n|
+      (0..200.map do |n|
         {
           id: n,
           name: Faker::Witcher.monster,
